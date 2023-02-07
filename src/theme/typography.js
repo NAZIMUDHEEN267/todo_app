@@ -9,8 +9,5 @@ export const typography = {
     },
     sm_text: {
         fontSize: 13
-    },
-    number: {
-        fontSize: 13,
     }
 }
