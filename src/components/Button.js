@@ -25,7 +25,7 @@ const Button = (props) => {
 const ButtonContainer = styled.TouchableOpacity`
     width: 100%;
     borderRadius: 15px;
-    padding: 20px;
+    padding: 15px;
 `;
 
 

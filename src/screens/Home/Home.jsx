@@ -13,6 +13,7 @@ import {
   MessageStatus,
   SliderMedText,
   SliderSmText,
+  StatusContainer,
   Todo,
   TodoContainer,
   TodoMessage,
@@ -20,6 +21,7 @@ import {
   TodoTime
 } from './style';
 import shadow from '../../theme/shadow';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Home = () => {
   const [scrollX, setScrollX] = useState(0);
@@ -52,22 +54,80 @@ const Home = () => {
         />
       </Carousel>
       {/* todo list*/}
-      <TodoContainer>
+      <TodoContainer showsVerticalScrollIndicator={false}>
         <Todo>
           <TodoMessage style={shadow("blue")}>
             <TodoText>Morning bath</TodoText>
             <BottomLine />
-            <View>
-              <MessageStatus>
-                <FontAwesome name="circle-thin" size={20} />
-                8 pm - 9 pm
-              </MessageStatus>
-            </View>
+            <StatusContainer>
+              <View style={{flexDirection: "row", alignItems: "center"}}>
+                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8}} />
+                <MessageStatus>
+                  8 pm - 9 pm
+                </MessageStatus>
+              </View>
+              <TouchableOpacity>
+                <FontAwesome name={"edit"} size={18} />
+              </TouchableOpacity>
+            </StatusContainer>
+          </TodoMessage>
+          <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
+        </Todo>
+        <Todo>
+          <TodoMessage style={{ backgroundColor: "#f0c9ee"}}>
+            <TodoText>Morning bath</TodoText>
+            <BottomLine />
+            <StatusContainer>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
+                <MessageStatus>
+                  8 pm - 9 pm
+                </MessageStatus>
+              </View>
+              <TouchableOpacity>
+                <FontAwesome name={"edit"} size={18} />
+              </TouchableOpacity>
+            </StatusContainer>
+          </TodoMessage>
+          <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
+        </Todo>
+        <Todo>
+          <TodoMessage style={{ backgroundColor: "#cbf2f2" }}>
+            <TodoText>Morning bath</TodoText>
+            <BottomLine />
+            <StatusContainer>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
+                <MessageStatus>
+                  8 pm - 9 pm
+                </MessageStatus>
+              </View>
+              <TouchableOpacity>
+                <FontAwesome name={"edit"} size={18} />
+              </TouchableOpacity>
+            </StatusContainer>
+          </TodoMessage>
+          <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
+        </Todo>
+        <Todo>
+          <TodoMessage style={{ backgroundColor: "#f2dfcb"}}>
+            <TodoText>Morning bath</TodoText>
+            <BottomLine />
+            <StatusContainer>
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
+                <MessageStatus>
+                  8 pm - 9 pm
+                </MessageStatus>
+              </View>
+              <TouchableOpacity>
+                <FontAwesome name={"edit"} size={18} />
+              </TouchableOpacity>
+            </StatusContainer>
           </TodoMessage>
           <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
         </Todo>
       </TodoContainer>
-
       {/* add button */}
       <Button />
     </Container>

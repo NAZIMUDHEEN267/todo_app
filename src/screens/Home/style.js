@@ -27,7 +27,8 @@ export const SliderSmText = styled.Text`
 
 export const TodoContainer = styled.ScrollView`
   height: 100%;
-  padding: 5px;
+  margin-vertical: 10px;
+  padding: 10px;
 `;
 
 export const Todo = styled.View`
@@ -52,6 +53,12 @@ export const BottomLine = styled.View`
   background-color: rgba(0,0,0,.2);
   height: 1px;
   margin-vertical: 2px;
+`;
+
+export const StatusContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const MessageStatus = styled(SliderSmText)`
