@@ -1,17 +1,16 @@
+import { useEffect, useState } from "react";
 import { Provider, useSelector } from "react-redux";
-import { NavigationContainer, DarkTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import store from "./src/store";
 import StackNavigator from "./src/navigation/stackNavigation";
-import {dark, light} from './src/theme/theme';
+import { light, dark } from "./src/theme/theme";
 
-console.log(DarkTheme);
-
-const App = () => {
-
+function App (){  
+  const [theme, setTheme] = useState(false);
   return (
     <Provider store={store}>
-      <NavigationContainer theme={dark}>
-        <StackNavigator />
+      <NavigationContainer theme={theme ? dark : light}>
+        <StackNavigator themeCb={setTheme}/>
       </NavigationContainer>
     </Provider>
   )

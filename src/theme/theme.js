@@ -6,7 +6,7 @@ export const dark = {
         background: "#05103A",
         card: "#101C43",
         title: "#fff",
-        text: "#000",
+        text: "#fff",
         box: "#2d3758",
         button: "#41c5e2",
         sm_text: "#455072"
