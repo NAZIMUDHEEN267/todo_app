@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native'
+import { FlatList, ScrollView, Slider, View } from 'react-native'
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from 'react';
 // import Animated, {interpolate, Extrapolate, useSharedValue} from "react-native-reanimated"
@@ -6,10 +6,19 @@ import { slideArray, dateNum, day } from '../../helper/Date';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
 import {
-  SliderItem,
+  BottomLine,
+  Carousel,
+  CarouselItem,
+  MessageStatus,
   SliderMedText,
-  SliderSmText
+  SliderSmText,
+  Todo,
+  TodoContainer,
+  TodoMessage,
+  TodoText,
+  TodoTime
 } from './style';
+import shadow from '../../theme/shadow';
 
 const Home = () => {
   const [scrollX, setScrollX] = useState(0);
@@ -18,29 +27,44 @@ const Home = () => {
 
   return (
     <Container>
-      {/* scroll dates */}
-      <FlatList
-        horizontal
-        data={slideArray}
-        bounces={false}
-        showsHorizontalScrollIndicator={false}
-        onScroll={(e) => setScrollX(e.nativeEvent.contentOffset.x)}
-        renderItem={function ({ item, index }) {
-          return (
-            <SliderItem
-              style={{ backgroundColor: colors.box }}
-              mrglft={index === 0 ? true : false}
-              mrgrght={index === slideArray.length - 1 ? true : false}
-              item={scrollX}
-            >
-              <SliderMedText>{item.dayNUm}</SliderMedText>
-              <SliderSmText>{item.day}</SliderSmText>
-            </SliderItem>
-          )
-        }}
-      />
+      {/* slider */}
+      <Carousel>
+        <FlatList
+          horizontal
+          data={slideArray}
+          bounces={false}
+          showsHorizontalScrollIndicator={false}
+          onScroll={(e) => setScrollX(e.nativeEvent.contentOffset.x)}
+          renderItem={function ({ item, index }) {
+            return (
+              <CarouselItem
+                style={{ backgroundColor: colors.box }}
+                mrglft={index === 0 ? true : false}
+                mrgrght={index === slideArray.length - 1 ? true : false}
+                item={scrollX}
+              >
+                <SliderMedText style={{color: colors.text}}>{item.dayNUm}</SliderMedText>
+                <SliderSmText style={{color: colors.sm_text}}>{item.day}</SliderSmText>
+              </CarouselItem>
+            )
+          }}
+        />
+      </Carousel>
       {/* todo list*/}
-
+      <TodoContainer>
+        <Todo>
+            <TodoMessage style={shadow("blue")}>
+              <TodoText>Morning bath</TodoText>
+              <BottomLine />
+              <View>
+                <MessageStatus>
+                  8 pm - 9 pm
+                </MessageStatus>
+              </View>
+            </TodoMessage>
+            <TodoTime style={{color: colors.sm_text}}>8 AM</TodoTime>
+        </Todo>
+      </TodoContainer>
 
       {/* add button */}
       <Button />

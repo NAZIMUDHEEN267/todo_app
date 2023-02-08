@@ -5,11 +5,10 @@ export const dark = {
     colors: {
         background: "#05103A",
         card: "#101C43",
-        title: "#fff",
         text: "#fff",
-        box: "#2d3758",
+        box: "#2a306b",
         button: "#41c5e2",
-        sm_text: "#455072",
+        sm_text: "#bec4bf",
         buttonTxt: "#fff"
     }
 }
@@ -20,9 +19,9 @@ export const light = {
         background: "#fff",
         card: "#fff",
         text: "#000",
-        border: "#555",
         box: "rgba(0, 0, 0, 0.1)",
         button: "#41c5e2",
+        sm_text: "#455072",
         buttonTxt: "#fff"
     }
 }
