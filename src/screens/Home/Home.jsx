@@ -1,6 +1,7 @@
 import { FlatList, ScrollView, Slider, View } from 'react-native'
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from 'react';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 // import Animated, {interpolate, Extrapolate, useSharedValue} from "react-native-reanimated"
 import { slideArray, dateNum, day } from '../../helper/Date';
 import Button from '../../components/Button';
@@ -43,8 +44,8 @@ const Home = () => {
                 mrgrght={index === slideArray.length - 1 ? true : false}
                 item={scrollX}
               >
-                <SliderMedText style={{color: colors.text}}>{item.dayNUm}</SliderMedText>
-                <SliderSmText style={{color: colors.sm_text}}>{item.day}</SliderSmText>
+                <SliderMedText style={{ color: colors.text }}>{item.dayNUm}</SliderMedText>
+                <SliderSmText style={{ color: colors.sm_text }}>{item.day}</SliderSmText>
               </CarouselItem>
             )
           }}
@@ -53,16 +54,17 @@ const Home = () => {
       {/* todo list*/}
       <TodoContainer>
         <Todo>
-            <TodoMessage style={shadow("blue")}>
-              <TodoText>Morning bath</TodoText>
-              <BottomLine />
-              <View>
-                <MessageStatus>
-                  8 pm - 9 pm
-                </MessageStatus>
-              </View>
-            </TodoMessage>
-            <TodoTime style={{color: colors.sm_text}}>8 AM</TodoTime>
+          <TodoMessage style={shadow("blue")}>
+            <TodoText>Morning bath</TodoText>
+            <BottomLine />
+            <View>
+              <MessageStatus>
+                <FontAwesome name="circle-thin" size={20} />
+                8 pm - 9 pm
+              </MessageStatus>
+            </View>
+          </TodoMessage>
+          <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
         </Todo>
       </TodoContainer>
 
