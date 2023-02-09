@@ -1,11 +1,11 @@
-import { FlatList, ScrollView, Slider, View } from 'react-native'
+import { FlatList, View, ImageBackground } from 'react-native'
 import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-// import Animated, {interpolate, Extrapolate, useSharedValue} from "react-native-reanimated"
 import { slideArray, dateNum, day } from '../../helper/Date';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
+import bg from "../../assets/images/pattern_3.jpg"
 import {
   BottomLine,
   Carousel,
@@ -60,8 +60,8 @@ const Home = () => {
             <TodoText>Morning bath</TodoText>
             <BottomLine />
             <StatusContainer>
-              <View style={{flexDirection: "row", alignItems: "center"}}>
-                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8}} />
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
                 <MessageStatus>
                   8 pm - 9 pm
                 </MessageStatus>

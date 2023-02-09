@@ -1,15 +1,22 @@
 import React from 'react';
 import { Image, View } from 'react-native'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from "react-native-switch";
 import SunImg from "../assets/images/sun.png";
 import MoonImg from "../assets/images/moon.png";
 import { DARK_THEME, LIGHT_THEME } from "../slices/themeSlice"
 import { dark, light } from '../theme/theme';
 
-const lightButton = ({themeCb}) => {
+const lightButton = ({ themeCb }) => {
+
   const [isEnable, setIsEnable] = React.useState(false);
   const dispatch = useDispatch();
+  const storageVal = useSelector((state) => state.theme.theme.dark);
+
+  React.useEffect(() => {
+    themeCb(storageVal);
+    setIsEnable(storageVal);
+  }, []);
 
   // function that change app theme when toggle value change
   const handleToggle = () => {
@@ -25,7 +32,7 @@ const lightButton = ({themeCb}) => {
   };
 
   return (
-    <View style={{margin: 10}}>
+    <View style={{ margin: 10 }}>
       <Switch
         value={isEnable}
         onValueChange={handleToggle}
