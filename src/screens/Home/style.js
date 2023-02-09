@@ -45,7 +45,7 @@ export const TodoMessage = styled.View`
 `;
 
 export const TodoText = styled(SliderMedText)`
-
+  color: #222;
 `;
 
 export const BottomLine = styled.View`
