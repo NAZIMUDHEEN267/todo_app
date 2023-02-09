@@ -17,7 +17,7 @@ const Button = (props) => {
     )
 }
 
- const Text = styled.Text`asdfasdfasdfsa
+ const Text = styled.Text`
     text-align: center;
     ${{ ...typography.text }}
 `;
