@@ -1,11 +1,14 @@
-import { FlatList, View, ImageBackground } from 'react-native'
-import { useTheme } from "@react-navigation/native";
 import { useEffect, useState } from 'react';
+import { FlatList, View, ImageBackground, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from "@react-navigation/native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { slideArray, dateNum, day } from '../../helper/Date';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
-import bg from "../../assets/images/pattern_3.jpg"
+import bg from "../../assets/images/pattern_3.jpg";
+import { GET_DATA } from '../../slices/storageSlice';
+import { CHECK_USER } from '../../slices/userSlice';
 import {
   BottomLine,
   Carousel,
@@ -21,10 +24,14 @@ import {
   TodoTime
 } from './style';
 import shadow from '../../theme/shadow';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const Home = () => {
   const [scrollX, setScrollX] = useState(0);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(CHECK_USER(false))
+  }, [])
 
   const { colors } = useTheme();
 
@@ -55,24 +62,29 @@ const Home = () => {
       </Carousel>
       {/* todo list*/}
       <TodoContainer showsVerticalScrollIndicator={false}>
-        <Todo>
-          <TodoMessage style={shadow("blue")}>
-            <TodoText>Morning bath</TodoText>
-            <BottomLine />
-            <StatusContainer>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
-                <MessageStatus>
-                  8 pm - 9 pm
-                </MessageStatus>
-              </View>
-              <TouchableOpacity activeOpacity={.5}>
-                <FontAwesome name={"edit"} size={18} />
-              </TouchableOpacity>
-            </StatusContainer>
-          </TodoMessage>
-          <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
-        </Todo>
+        {/* {
+          map(() => 
+            return (
+            <Todo>
+              <TodoMessage style={shadow("blue")}>
+                <TodoText>Morning bath</TodoText>
+                <BottomLine />
+                <StatusContainer>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
+                    <MessageStatus>
+                      8 pm - 9 pm
+                    </MessageStatus>
+                  </View>
+                  <TouchableOpacity activeOpacity={.5}>
+                    <FontAwesome name={"edit"} size={18} />
+                  </TouchableOpacity>
+                </StatusContainer>
+              </TodoMessage>
+              <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
+            </Todo>
+          ))
+        } */}
       </TodoContainer>
       {/* add button */}
       <Button />

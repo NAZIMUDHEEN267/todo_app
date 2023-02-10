@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { Image, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from "react-native-switch";
@@ -9,11 +9,12 @@ import { dark, light } from '../theme/theme';
 
 const lightButton = ({ themeCb }) => {
 
-  const [isEnable, setIsEnable] = React.useState(false);
+  const [isEnable, setIsEnable] = useState(false);
   const dispatch = useDispatch();
-  const storageVal = useSelector((state) => state.theme.theme.dark);
+  const storageVal = useSelector((state) => state);
 
-  React.useEffect(() => {
+  // theme setting when component first loading time
+  useEffect(() => {
     themeCb(storageVal);
     setIsEnable(storageVal);
   }, []);

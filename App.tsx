@@ -9,7 +9,7 @@ import { persistor } from './src/store';
 
 function App() {
   const [theme, setTheme] = useState(false);
-  
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
