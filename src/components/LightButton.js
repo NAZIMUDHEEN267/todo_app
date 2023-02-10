@@ -6,6 +6,7 @@ import SunImg from "../assets/images/sun.png";
 import MoonImg from "../assets/images/moon.png";
 import { DARK_THEME, LIGHT_THEME } from "../slices/themeSlice"
 import { dark, light } from '../theme/theme';
+import { PRIMARY_COLOR } from '../constants/colors';
 
 const lightButton = ({ themeCb }) => {
 
@@ -40,7 +41,7 @@ const lightButton = ({ themeCb }) => {
         circleSize={32}
         renderActiveText={false}
         renderInActiveText={false}
-        backgroundActive={"#41c5e2"}
+        backgroundActive={PRIMARY_COLOR}
         switchBorderRadius={20}
         circleBorderWidth={1}
         renderInsideCircle={() => (

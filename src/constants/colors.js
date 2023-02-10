@@ -7,3 +7,5 @@ export const DARK_PINK = "pink";
 export const DARK_BLUE = "blue";
 export const DARK_ORANGE = "orange";
 export const DARK_GREEN = "green";
+
+export const PRIMARY_COLOR = "orange"
