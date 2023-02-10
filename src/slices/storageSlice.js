@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const love = createAsyncThunk('todo/GET_DATA', () => {
+    return Promise((resolve, reject) => {
+        setTimeout(() => resolve("hello"), 3000);
+    })
+})
 const storageSlice = createSlice({
     name: "todo",
     initialState: {
@@ -21,19 +26,13 @@ const storageSlice = createSlice({
         }]
 
     },
-    reducers: {
-        GET_DATA(state, action) {
-            console.log(state.todos);
-        },
-        SET_DATA(state, action) {
-
-        },
-        UPDATE(state, action) {
-
-        },
-        DELETE(state, action) {
-
-        }
+    extraReducers: (builder) => {
+        builder.addCase(love.pending, () => {
+            console.log("haiiiii");
+        })
+        builder.addCase(love.fulfilled, (_, action) => {
+            console.log(action.payload);
+        })
     }
 });
 

@@ -11,7 +11,7 @@ const lightButton = ({ themeCb }) => {
 
   const [isEnable, setIsEnable] = useState(false);
   const dispatch = useDispatch();
-  const storageVal = useSelector((state) => state);
+  const storageVal = useSelector((state) => state.theme.theme.dark);
 
   // theme setting when component first loading time
   useEffect(() => {

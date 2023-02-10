@@ -7,7 +7,6 @@ import { slideArray, dateNum, day } from '../../helper/Date';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
 import bg from "../../assets/images/pattern_3.jpg";
-import { GET_DATA } from '../../slices/storageSlice';
 import { CHECK_USER } from '../../slices/userSlice';
 import {
   BottomLine,
@@ -29,6 +28,8 @@ import shadow from '../../theme/shadow';
 const Home = () => {
   const [scrollX, setScrollX] = useState(0);
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(CHECK_USER(false))
   }, [])
