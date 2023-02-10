@@ -3,34 +3,26 @@ import {
   FlatList,
   View,
   TouchableOpacity,
-  Image, Text
+  Image
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from "@react-navigation/native";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { slideArray, currentDate } from '../../helper/Date';
 import Button from '../../components/Button';
+import TodoItem from '../../components/Todo';
 import Container from '../../components/Container';
 import NotFound from "../../assets/images/oops.png";
 import { CHECK_USER } from '../../slices/userSlice';
-import { WIDTH } from '../../constants/space';
-import { DARK_BLUE, PRIMARY_COLOR } from '../../constants/colors';
+import { PRIMARY_COLOR } from '../../constants/colors';
 import {
-  BottomLine,
   Carousel,
   CarouselItem,
-  MessageStatus,
   SliderMedText,
   SliderSmText,
-  StatusContainer,
-  Todo,
   TodoContainer,
-  TodoMessage,
-  TodoText,
-  TodoTime
 } from './style';
-import shadow from '../../theme/shadow';
 import { getItem } from '../../slices/storageSlice';
+import { day } from '../../helper/Date';
 
 
 const Home = () => {
@@ -44,7 +36,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(CHECK_USER(false));
     // dispatch(getItem(currentDate))
-    navScrollRef.current.scrollToIndex({ index: 10, viewOffset: WIDTH * 1.2 })
+    navScrollRef.current.scrollToIndex({ index: day, viewOffset: day * 53})
   }, [])
 
   const { colors } = useTheme();
@@ -62,10 +54,10 @@ const Home = () => {
           data={slideArray}
           bounces={false}
           showsHorizontalScrollIndicator={false}
-          onScroll={(e) => setScrollX(e.nativeEvent.contentOffset.x)}
+          keyExtractor={(_, i) => String(i)}
           renderItem={function ({ item, index }) {
 
-            const currentDate = index === 10;
+            const currentDate = index === day - 1;
 
             return (
               <CarouselItem
@@ -87,24 +79,7 @@ const Home = () => {
         {
           itemFound ?
             items.map((item, i) => (
-              <Todo key={String(i)}>
-                <TodoMessage style={shadow("blue")}>
-                  <TodoText>{item.message}</TodoText>
-                  <BottomLine />
-                  <StatusContainer>
-                    <View style={{ flexDirection: "row", alignItems: "center" }}>
-                      <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
-                      <MessageStatus>
-                        {item.start_time} pm - {item.end_time} pm
-                      </MessageStatus>
-                    </View>
-                    <TouchableOpacity activeOpacity={.5}>
-                      <FontAwesome name={"edit"} size={18} />
-                    </TouchableOpacity>
-                  </StatusContainer>
-                </TodoMessage>
-                <TodoTime style={{ color: colors.sm_text }}>{item.start_time} AM</TodoTime>
-              </Todo>
+              <TodoItem key={String(i)} data={item}/>
             ))
             :
             <Image
