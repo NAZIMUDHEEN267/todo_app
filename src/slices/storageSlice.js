@@ -1,40 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getValue } from "../storage/Async-storage";
 
-const love = createAsyncThunk('todo/GET_DATA', () => {
-    return Promise((resolve, reject) => {
-        setTimeout(() => resolve("hello"), 3000);
-    })
-})
+const getItem = createAsyncThunk('todo/GET_DATA', getValue);
+
 const storageSlice = createSlice({
     name: "todo",
     initialState: {
-        todos: [{
-            message: "something",
-            start_time: 1,
-            end_time: 2,
-            day: false,
-            color: "",
-            reminder: true
-        },
-        {
-            message: "something",
-            start_time: 1,
-            end_time: 2,
-            day: false,
-            color: "",
-            reminder: true
-        }]
+        todos: [],
+        itemFound: false
 
     },
     extraReducers: (builder) => {
-        builder.addCase(love.pending, () => {
-            console.log("haiiiii");
+        builder.addCase(getItem.fulfilled, (state, action) => {
+            if (!action.payload) {
+                state.itemFound = false;
+            } else {
+                state.itemFound = true;
+                state.todos = [...action.payload];
+            }
         })
-        builder.addCase(love.fulfilled, (_, action) => {
-            console.log(action.payload);
+        builder.addCase(getItem.rejected, (state, action) => {
+            console.log(action.error.message);
         })
     }
 });
 
 export default storageSlice.reducer;
-export const { GET_DATA, DELETE, SET_DATA, UPDATE } = storageSlice.actions;
+export { getItem }

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { FlatList, View, ImageBackground, TouchableOpacity } from 'react-native';
+import { FlatList, View, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from "@react-navigation/native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { slideArray, dateNum, day } from '../../helper/Date';
+import { slideArray, currentDate } from '../../helper/Date';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
-import bg from "../../assets/images/pattern_3.jpg";
+import NotFound from "../../assets/images/oops.png";
 import { CHECK_USER } from '../../slices/userSlice';
 import {
   BottomLine,
@@ -23,15 +23,18 @@ import {
   TodoTime
 } from './style';
 import shadow from '../../theme/shadow';
+import { getItem } from '../../slices/storageSlice';
 
 
 const Home = () => {
   const [scrollX, setScrollX] = useState(0);
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
-
+  const itemFound = useSelector(state => state.db.itemFound);
+  dispatch(getItem(currentDate))
 
   useEffect(() => {
-    dispatch(CHECK_USER(false))
+    dispatch(CHECK_USER(false));
   }, [])
 
   const { colors } = useTheme();
@@ -62,9 +65,12 @@ const Home = () => {
         />
       </Carousel>
       {/* todo list*/}
-      <TodoContainer showsVerticalScrollIndicator={false}>
-        {/* {
-          map(() => 
+      <TodoContainer
+        showsVerticalScrollIndicator={false}>
+        {
+          itemFound ?
+            {/*
+          values.map(() => 
             return (
             <Todo>
               <TodoMessage style={shadow("blue")}>
@@ -85,7 +91,13 @@ const Home = () => {
               <TodoTime style={{ color: colors.sm_text }}>8 AM</TodoTime>
             </Todo>
           ))
-        } */}
+         */} :
+            <Image
+              source={NotFound}
+              style={{ width: 200, height: 200, margin: "25%" }}
+              resizeMode={"contain"}
+            />
+        }
       </TodoContainer>
       {/* add button */}
       <Button />
