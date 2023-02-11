@@ -10,8 +10,9 @@ import {
     Todo,
     TodoText,
     TodoTime
-} from "../screens/Home/style";
-import shadow from '../theme/shadow';
+} from "@/screens/Home/style";
+import shadow from '@/theme/shadow';
+import { RED, DARK_GREEN } from "@/constants/colors";
 
 const TodoItem = ({ item }) => {
 
@@ -19,25 +20,27 @@ const TodoItem = ({ item }) => {
 
     return (
         <Todo>
-            <TodoMessage style={shadow("blue")}>
-                <TodoText>{"hello"}</TodoText>
+            <TodoMessage style={shadow("green")}>
+                <TodoText>{item.message}</TodoText>
                 <BottomLine />
                 <StatusContainer>
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <FontAwesome name="clock-o" size={15} color={"green"} style={{ marginRight: 8 }} />
+                        <FontAwesome name="clock-o" size={15} color={DARK_GREEN} style={{ marginRight: 8 }} />
                         <MessageStatus>
-                            {3} pm - {2} pm
+                            {item.start_time} - {item.end_time}
                         </MessageStatus>
                     </View>
+                    {/* Todo delete button */}
                     <TouchableOpacity>
-                        <AntDesign name="delete" size={20} color={"#db1d39"} />
+                        <AntDesign name="delete" size={20} color={RED} />
                     </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={.5}>
+                    {/* Todo edit button */}
+                    <TouchableOpacity activeOpacity={.5} >
                         <FontAwesome name={"edit"} size={18} />
                     </TouchableOpacity>
                 </StatusContainer>
             </TodoMessage>
-            <TodoTime style={{ color: colors.sm_text }}>{5} AM</TodoTime>
+            <TodoTime style={{ color: colors.sm_text }}>{item.start_time}</TodoTime>
         </Todo>
     )
 }

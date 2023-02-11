@@ -71,12 +71,7 @@ const Home = ({navigation}) => {
       {/* todo list*/}
       <TodoContainer
         showsVerticalScrollIndicator={false}>
-        {
-          itemFound ?
-            todos.map((item, i) => (
-              <TodoItem key={String(i)} data={item}/>
-            ))
-            :
+        {       
             <Image
               source={NotFound}
               style={{ width: 200, height: 200, margin: "25%" }}

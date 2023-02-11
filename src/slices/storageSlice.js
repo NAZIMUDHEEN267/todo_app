@@ -1,22 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const storageSlice = createSlice({
     name: "todo",
     initialState: {
-        todos: [],
-        itemFound: false,
-        id: 0
+        todos: {},
+        itemFound: false
     },
     reducers: {
         SET_ITEM(state, action){
-            state.itemFound = true;
-            state.todos.push(action.payload);
+            const { obj, currentDate } = action.payload;
+            if(currentDate in state.todos) {
+                state.todos[currentDate].push(obj);
+            } else {
+                state.todos.yes = [obj];
+            }
         },
         UPDATE_ITEM(state, action){
 
         },
         DELETE_ITEM(state, action){
-
+            state.todos = state.todos.map((todo) => {
+                if(todo.id !== action.payload) {
+                    return todo;
+                }
+            })
         }
     }
 });

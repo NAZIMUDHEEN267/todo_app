@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { typography } from "@/theme/typography";
 import { SPACE, SIDE_CARD_SPACE } from "@/constants/space";
+import shadow from "theme/shadow";
 
 export const Carousel = styled.View`
   width: 100%;
