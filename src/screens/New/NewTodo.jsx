@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react'
 import Container from '@/components/Container';
-import { Message, MessageInput, MessagePicker, SelectedDate } from './style';
+import { CalenderBtn, CalenderPicker, Message, MessageInput, MessagePicker, PickerBtn, SelectedDate } from './style';
 import { SET_ITEM } from 'slices/storageSlice';
 import { useDispatch } from 'react-redux';
 import idCreator from 'helper/idCreator';
 import { currentDate } from 'helper/Date';
+import shadow from 'theme/shadow';
+import Evil from "react-native-vector-icons/EvilIcons";
+import Material from "react-native-vector-icons/MaterialIcons";
+import { LIGHT_ORANGE } from 'constants/colors';
 
 const NewTodo = () => {
   const dispatch = useDispatch();
@@ -21,19 +25,41 @@ const NewTodo = () => {
     }
     console.log("onhandle", obj.id);
 
-    dispatch(SET_ITEM({obj, currentDate}));
+    dispatch(SET_ITEM({ obj, currentDate }));
   }
 
   useEffect(() => {
-    handleClick();
+    // handleClick();
   }, [])
 
   return (
     <Container>
-      <Message>
-        <MessageInput />
+      <Message style={shadow("rgba(0,0,0,0.4)")}>
         <MessagePicker>
-          <SelectedDate>hello</SelectedDate>
+          <PickerBtn>
+            <Material name={"stop-circle"} size={15} style={{ color: "green" }} />
+          </PickerBtn>
+        </MessagePicker>
+        <MessageInput />
+
+        <MessagePicker>
+          <PickerBtn>
+            <Evil name={"pencil"} size={35} style={{ color: "rgba(0,0,0,0.4)" }} />
+          </PickerBtn>
+        </MessagePicker>
+      </Message>
+      <Message style={shadow("rgba(0,0,0,0.4)")}>
+        <CalenderPicker>
+          <CalenderBtn>
+            <Evil name={"calendar"} size={35} style={{ backgroundColor: LIGHT_ORANGE, color: "crimson" }} />
+          </CalenderBtn>
+        </CalenderPicker>
+        <MessageInput />
+
+        <MessagePicker>
+          <PickerBtn>
+            <Evil name={"pencil"} size={35} style={{ color: "rgba(0,0,0,0.4)" }} />
+          </PickerBtn>
         </MessagePicker>
       </Message>
     </Container>
