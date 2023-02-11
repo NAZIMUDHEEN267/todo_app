@@ -12,7 +12,7 @@ import {
 } from "../screens/Home/style";
 import shadow from '../theme/shadow';
 
-const TodoItem = ({item}) => {
+const TodoItem = ({ item }) => {
 
     const { colors } = useTheme();
 

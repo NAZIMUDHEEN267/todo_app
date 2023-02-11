@@ -1,10 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import {
-  FlatList,
-  View,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { FlatList, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from "@react-navigation/native";
 import { slideArray, currentDate } from '../../helper/Date';
@@ -35,7 +30,6 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(CHECK_USER(false));
-    // dispatch(getItem(currentDate))
     navScrollRef.current.scrollToIndex({ index: day, viewOffset: day * 53})
   }, [])
 

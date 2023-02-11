@@ -3,17 +3,24 @@ import styled from "styled-components/native";
 import { useTheme } from '@react-navigation/native';
 import { typography } from '../theme/typography';
 import { useDispatch } from 'react-redux';
-import { postItem } from '../slices/storageSlice';
-import { LIGHT_BLUE, PRIMARY_COLOR } from '../constants/colors';
+import { SET_ITEM } from '../slices/storageSlice';
+import { PRIMARY_COLOR } from '../constants/colors';
 
 const Button = (props) => {
 
-    const set = useDispatch();
+    const dispatch = useDispatch();
     const { colors } = useTheme();
 
     return (
         <ButtonContainer
-            onPress={() => set(postItem())}
+            onPress={() => dispatch(SET_ITEM({
+                message: "something...",
+                start_time: 8,
+                end_time: "8:30",
+                color: "pink",
+                day: true,
+                reminder: true
+            }))}
             style={{ backgroundColor: PRIMARY_COLOR}}
             activeOpacity={.7}
         >
