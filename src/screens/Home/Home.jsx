@@ -1,14 +1,15 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FlatList, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from "@react-navigation/native";
-import { slideArray, currentDate } from '../../helper/Date';
-import Button from '../../components/Button';
-import TodoItem from '../../components/Todo';
-import Container from '../../components/Container';
-import NotFound from "../../assets/images/oops.png";
-import { CHECK_USER } from '../../slices/userSlice';
-import { PRIMARY_COLOR } from '../../constants/colors';
+import { slideArray, currentDate } from '@/helper/Date';
+import Button from '@/components/Button';
+import TodoItem from '@/components/Todo';
+import Container from '@/components/Container';
+import NotFound from "@/assets/images/oops.png";
+import { CHECK_USER } from '@/slices/userSlice';
+import { PRIMARY_COLOR } from '@/constants/colors';
+import { NAVIGATION } from '@/constants/navigation';
 import {
   Carousel,
   CarouselItem,
@@ -16,24 +17,25 @@ import {
   SliderSmText,
   TodoContainer,
 } from './style';
-import { getItem } from '../../slices/storageSlice';
-import { day } from '../../helper/Date';
+import { day } from '@/helper/Date';
 
 
-const Home = () => {
-  const [scrollX, setScrollX] = useState(0);
-  const [data, setData] = useState([]);
+const Home = ({navigation}) => {
+  const { colors } = useTheme();
+  const { todos, itemFound } = useSelector(state => state.db);
   const dispatch = useDispatch();
-  const itemFound = useSelector(state => state.db.itemFound);
-  const items = useSelector(state => state.db.todos);
   const navScrollRef = useRef();
 
   useEffect(() => {
     dispatch(CHECK_USER(false));
     navScrollRef.current.scrollToIndex({ index: day, viewOffset: day * 53})
-  }, [])
+  }, []);
 
-  const { colors } = useTheme();
+  // Event handler for button 
+  function eventHandler() {
+    navigation.navigate(NAVIGATION.NewTodo);
+  }
+
 
   return (
     <Container>
@@ -58,7 +60,6 @@ const Home = () => {
                 style={currentDate ? { backgroundColor: PRIMARY_COLOR } : { backgroundColor: colors.box, transform: [{ scale: .9 }] }}
                 mrglft={index === 0 ? true : false}
                 mrgrght={index === slideArray.length - 1 ? true : false}
-                item={scrollX}
               >
                 <SliderMedText style={currentDate ? { color: colors.buttonTxt } : { color: colors.text }}>{item.dayNUm}</SliderMedText>
                 <SliderSmText style={currentDate ? { color: colors.buttonTxt } : { color: colors.sm_text }}>{item.day}</SliderSmText>
@@ -72,7 +73,7 @@ const Home = () => {
         showsVerticalScrollIndicator={false}>
         {
           itemFound ?
-            items.map((item, i) => (
+            todos.map((item, i) => (
               <TodoItem key={String(i)} data={item}/>
             ))
             :
@@ -84,7 +85,7 @@ const Home = () => {
         }
       </TodoContainer>
       {/* add button */}
-      <Button />
+      <Button eventHandler={eventHandler} btnText={"+ Add a New Todo"}/>
     </Container>
   )
 }

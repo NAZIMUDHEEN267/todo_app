@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
-import {Provider, useSelector} from 'react-redux';
+import { useState} from 'react';
+import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {PersistGate} from 'redux-persist/integration/react';
-import StackNavigator from './src/navigation/stackNavigation';
-import {light, dark} from './src/theme/theme';
-import store from './src/store';
-import { persistor } from './src/store';
+import StackNavigator from '@/navigation/stackNavigation';
+import {light, dark} from '@/theme/theme';
+import store from '@/store';
+import { persistor } from '@/store';
 
 function App() {
   const [theme, setTheme] = useState(false);

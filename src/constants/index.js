@@ -1,1 +1,1 @@
-import { NAVIGATION } from "./navigation";
+import { NAVIGATION } from "@/navigation";

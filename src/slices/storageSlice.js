@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getValue, postValue } from "../storage/Async-storage";
+import { createSlice } from "@reduxjs/toolkit";
 
 const storageSlice = createSlice({
     name: "todo",

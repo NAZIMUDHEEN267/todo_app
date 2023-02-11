@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { Image, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux';
 import { Switch } from "react-native-switch";
-import SunImg from "../assets/images/sun.png";
-import MoonImg from "../assets/images/moon.png";
-import { DARK_THEME, LIGHT_THEME } from "../slices/themeSlice"
-import { dark, light } from '../theme/theme';
-import { PRIMARY_COLOR } from '../constants/colors';
+import SunImg from "@/assets/images/sun.png";
+import MoonImg from "@/assets/images/moon.png";
+import { DARK_THEME, LIGHT_THEME } from "@/slices/themeSlice"
+import { dark, light } from '@/theme/theme';
+import { PRIMARY_COLOR } from '@/constants/colors';
 
 const lightButton = ({ themeCb }) => {
 
