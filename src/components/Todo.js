@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { useTheme } from "@react-navigation/native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AntDesign from "react-native-vector-icons/AntDesign";
 import {
     BottomLine,
     MessageStatus,
@@ -28,6 +29,9 @@ const TodoItem = ({ item }) => {
                             {3} pm - {2} pm
                         </MessageStatus>
                     </View>
+                    <TouchableOpacity>
+                        <AntDesign name="delete" size={20} color={"#db1d39"} />
+                    </TouchableOpacity>
                     <TouchableOpacity activeOpacity={.5}>
                         <FontAwesome name={"edit"} size={18} />
                     </TouchableOpacity>

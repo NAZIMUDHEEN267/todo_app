@@ -40,6 +40,7 @@ export const Todo = styled.View`
 export const TodoMessage = styled.View`
   width: 80%;
   padding: 15px;
+  padding-bottom: 5px;
   border-radius: 5px;
   background-color: #cbf2cd;
 `;
@@ -52,7 +53,8 @@ export const BottomLine = styled.View`
   width: 100%;
   background-color: rgba(0,0,0,.2);
   height: 1px;
-  margin-vertical: 2px;
+  margin-top: 2px;
+  margin-bottom: 8px;
 `;
 
 export const StatusContainer = styled.View`
