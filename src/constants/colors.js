@@ -4,7 +4,9 @@ export const LIGHT_ORANGE = "#fce7cf";
 export const LIGHT_GREEN = "#cbf2cd";
 export const LIGHT_RED = "#f0d5d9";
 export const LIGHT_YELLOW = "#f2efd5";
+export const LIGHT_CYAN = "#bbe6ed";
 
+export const DARK_CYAN = "#0e98b0";
 export const DARK_YELLOW = "#ffe205";
 export const DARK_PINK = "#d911aa";
 export const DARK_BLUE = "blue";

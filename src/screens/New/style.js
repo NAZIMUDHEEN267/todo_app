@@ -77,3 +77,14 @@ export const DropDownText = styled(TimeText)`
     text-align: left;
     align-self: center;
 `;
+
+export const CalenderContainer = styled.View`
+    position: absolute;
+    z-index: 3333; 
+    elevation: 9999;
+    width: 100%;
+    top: 10%;
+    border-width: 5px;
+    border-radius: 5px;
+    border-color: orange;           
+`;

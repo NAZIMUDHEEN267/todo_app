@@ -3,11 +3,15 @@ const moment = require('moment');
 
 export const fullDate = moment().format("MMMM DD");
 
-export const currentDate = moment().format("DD/MM/YYYY");
+export const currentDate = moment().format("YYYY-MM-DD");
 
 export const totalDays = moment().daysInMonth();
 
 export const day = Number(moment().format("DD"));
+
+export const stringDay = (date) => moment(date, "YYYY-MM-DD").format("dddd");
+
+export const stringMonth = (date) => moment(date, "YYYY-MM-DD").format("MMMM"); 
 
 // return day/day number of this month
 export const slideArray = Array(totalDays).fill(0).map((_, i) => {

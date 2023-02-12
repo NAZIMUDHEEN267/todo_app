@@ -26,7 +26,7 @@ const Button = ({eventHandler, btnText}) => {
 
 const ButtonContainer = styled.TouchableOpacity`
     width: 100%;
-    borderRadius: 15px;
+    border-radius: 15px;
     padding: 15px;
 `;
 
