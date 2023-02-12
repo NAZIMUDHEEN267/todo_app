@@ -1,4 +1,4 @@
-import { LIGHT_ORANGE } from "constants/colors";
+import { LIGHT_ORANGE, LIGHT_RED, SHADOW_COLOR } from "constants/colors";
 import styled from "styled-components/native";
 import { typography } from "theme/typography";
 
@@ -9,12 +9,14 @@ export const Message = styled.View`
     border-radius: 5px;
     flex-direction: row;
     align-items: center;
+    border-bottom-width: 1px;
+    border-color: rgba(0,0,0,.1);
 `;
 
 export const MessageInput = styled.TextInput`
     width: 60%;
     height: 100%;
-    ${{...typography.text}}
+    ${{...typography.md_text}}
 `;
 
 export const MessagePicker = styled.View`
@@ -35,5 +37,43 @@ export const PickerBtn = styled.TouchableOpacity`
 export const CalenderPicker = styled(MessagePicker)``;
 
 export const CalenderBtn = styled(PickerBtn)`
+    background-color: ${LIGHT_RED};
+`;
+
+export const TimePicker = styled(MessagePicker)`
+    width: 40%;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: center;
+    border-bottom-width: 1px;
+    border-color: rgba(0,0,0,.1);
+`;
+
+export const TimeBtn = styled(PickerBtn)`
     background-color: ${LIGHT_ORANGE};
+`;
+
+export const Divide = styled.Text`
+    width: 20%;
+    text-align: center;
+    ${{...typography.text}}
+`;
+
+export const TimeText = styled(Divide)`
+    width: 50%;
+    margin-left: 5px;
+`;
+
+export const DropDownItem = styled.View`
+    flex-direction: row;
+    height: 70px;
+    padding: 12px;
+    background-color: white;
+    text-align: left;
+`;
+
+export const DropDownText = styled(TimeText)`
+    ${{...typography.md_text}}
+    text-align: left;
+    align-self: center;
 `;

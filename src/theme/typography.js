@@ -9,6 +9,11 @@ export const typography = {
         "font-weight": "500",
         "font-family": "poppins"
     },
+    md_text: {
+        "font-size": "17px",
+        "font-weight": "500",
+        "font-family": "poppins"
+    },
     sm_text: {
         "font-size": "13px",
         "font-family": "open-sans"
