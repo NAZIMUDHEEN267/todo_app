@@ -1,12 +1,13 @@
 import store from "store";
 
 // get all todos from redux store
-const items = store.getState().db.todos;
-console.log(items);
 
 export default function idCreator(date) {
+
+    const items = store.getState().db.todos;
+    
     for (const key in items) {
-        if (items[key] === date) {
+        if (key === date) {
             const todoList = items[key];
             const previousTodo = todoList[todoList.length - 1];
             const previousId = previousTodo.id.split("_");

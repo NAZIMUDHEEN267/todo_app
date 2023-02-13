@@ -57,21 +57,29 @@ const NewTodo = ({ navigation }) => {
   let inputRef = useRef();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(value);
-  })
 
-  function handleClick(e) {
-    if (date.length < 1) {
-      e.preventDefault();
-    }
-    const obj = {
-      id: idCreator(date),
-      ...value
-    }
+  function handleClick() {
+    try {
+      const checkDate = date.split("/");
+      
+      if (checkDate[0].length === 1) {
+        checkDate[0] = "0" + checkDate[0];
+      } if (checkDate[1].length === 1) {
+        checkDate[1] = "0" + checkDate[1]
+      }
 
-    dispatch(SET_ITEM({ obj, currentDate }));
-    navigation.navigate(NAVIGATION.HOME)
+      const selectedDate = checkDate.join("/").split(",")[0];
+
+      const obj = {
+        id: idCreator(selectedDate),
+        ...value
+      }
+      
+      dispatch(SET_ITEM({ obj, selectedDate }));
+      // navigation.navigate(NAVIGATION.HOME)
+    } catch (error) {
+      alert("please make sure that you have filled or selected the fields...")
+    }
   }
 
   function showMode(currentMode, type) {
@@ -80,18 +88,19 @@ const NewTodo = ({ navigation }) => {
       onChange: function (event, selectedDate) {
         const currentDate = selectedDate || new Date();
         const stringDate = currentDate.toLocaleString();
-        const stringTime = stringDate.slice(11, 15);
+        const timeCheck = stringDate.split(":")[0].split(",")[1];
+        const stringTime = Number(timeCheck) < 10 ? "0" + stringDate.slice(11, 15) : stringDate.slice(11, 16);
         const day = stringDate.slice(19,);
 
         setDate(stringDate);
 
         if (type === "start") {
           setStartTime(stringTime + " " + day.toLocaleUpperCase());
-          setValue({...value, day: day === "pm" ? true : false, start_time: stringTime})
+          setValue({ ...value, day: day === "pm" ? true : false, start_time: stringTime })
         }
         else if (type === "end") {
           setEndTime(stringTime + " " + day.toUpperCase());
-          setValue({...value, end_time: stringTime})
+          setValue({ ...value, end_time: stringTime })
         }
       },
       mode: currentMode,
@@ -117,7 +126,7 @@ const NewTodo = ({ navigation }) => {
             value={text}
             onChangeText={(text) => {
               setText(text);
-              setValue({...value, message: text, height: height})
+              setValue({ ...value, message: text, height: height })
             }}
           />
 

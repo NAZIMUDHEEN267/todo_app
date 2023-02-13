@@ -8,11 +8,11 @@ const storageSlice = createSlice({
     },
     reducers: {
         SET_ITEM(state, action){
-            const { obj, currentDate } = action.payload;
-            if(currentDate in state.todos) {
-                state.todos[currentDate].push(obj);
+            const { obj, selectedDate } = action.payload;
+            if(selectedDate in state.todos) {
+                state.todos[selectedDate].push(obj);
             } else {
-                state.todos.yes = [obj];
+                state.todos[selectedDate] = [obj];
             }
         },
         UPDATE_ITEM(state, action){
