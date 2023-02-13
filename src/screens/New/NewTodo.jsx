@@ -76,7 +76,7 @@ const NewTodo = ({ navigation }) => {
       }
       
       dispatch(SET_ITEM({ obj, selectedDate }));
-      // navigation.navigate(NAVIGATION.HOME)
+      navigation.navigate(NAVIGATION.HOME)
     } catch (error) {
       alert("please make sure that you have filled or selected the fields...")
     }

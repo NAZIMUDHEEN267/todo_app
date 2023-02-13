@@ -3,7 +3,7 @@ const moment = require('moment');
 
 export const fullDate = moment().format("MMMM DD");
 
-export const currentDate = moment().format("YYYY-MM-DD");
+export const currentDate = moment().format("DD/MM/YYYY");
 
 export const totalDays = moment().daysInMonth();
 

@@ -12,7 +12,7 @@ import {
     TodoTime
 } from "@/screens/Home/style";
 import shadow from '@/theme/shadow';
-import { RED, DARK_GREEN } from "@/constants/colors";
+import { RED } from "@/constants/colors";
 
 const TodoItem = ({ item }) => {
 
@@ -20,12 +20,12 @@ const TodoItem = ({ item }) => {
 
     return (
         <Todo>
-            <TodoMessage style={shadow("green")}>
+            <TodoMessage style={{...shadow(item.colors.color), backgroundColor: item.colors.bg}}>
                 <TodoText>{item.message}</TodoText>
                 <BottomLine />
                 <StatusContainer>
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <FontAwesome name="clock-o" size={15} color={DARK_GREEN} style={{ marginRight: 8 }} />
+                        <FontAwesome name="clock-o" size={15} color={item.colors.color} style={{ marginRight: 8 }} />
                         <MessageStatus>
                             {item.start_time} - {item.end_time}
                         </MessageStatus>

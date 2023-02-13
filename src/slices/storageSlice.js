@@ -24,9 +24,12 @@ const storageSlice = createSlice({
                     return todo;
                 }
             })
+        },
+        SET_ITEM_FOUND(state, action){
+            state.itemFound = action.payload;
         }
     }
 });
 
 export default storageSlice.reducer;
-export const { SET_ITEM } = storageSlice.actions;
+export const { SET_ITEM, SET_ITEM_FOUND } = storageSlice.actions;
