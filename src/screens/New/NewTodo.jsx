@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import {
@@ -30,10 +30,11 @@ import {
 } from 'constants/colors';
 import Container from '@/components/Container';
 import Button from 'components/Button';
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { stringDay, stringMonth, currentDate } from 'helper/Date';
 import { NAVIGATION } from 'constants/navigation';
 import { TODO_TYPE_DATA, TODO_REMINDER_DATA } from 'constants/data';
+import { typography } from 'theme/typography';
 
 const NewTodo = ({ navigation }) => {
   const [height, setHeight] = useState(0);
@@ -42,17 +43,23 @@ const NewTodo = ({ navigation }) => {
   const [endTime, setEndTime] = useState("");
   const [styles, setStyles] = useState({ label: "Select type", icon: "question", color: "grey", bg: "rgba(0,0,0,.1)" });
   const [bellStyle, setBellStyle] = useState({ label: "Reminder", icon: "question", color: "grey", bg: "rgba(0,0,0,.1)" });
+  const [text, setText] = useState("");
   const [value, setValue] = useState({
     message: "",
     start_time: 0,
     end_time: 0,
-    day: false,
+    dayHalf: false,
     colors: {},
     reminder: false,
-    height
+    height: 0
   });
-  
+
+  let inputRef = useRef();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(value);
+  })
 
   function handleClick(e) {
     if (date.length < 1) {
@@ -74,12 +81,18 @@ const NewTodo = ({ navigation }) => {
         const currentDate = selectedDate || new Date();
         const stringDate = currentDate.toLocaleString();
         const stringTime = stringDate.slice(11, 15);
-        const day = stringDate.slice(19, );
+        const day = stringDate.slice(19,);
 
         setDate(stringDate);
 
-        if(type === "start") { setStartTime(stringTime + " " + day.toLocaleUpperCase()); }
-        else { setEndTime(stringTime + " " + day.toUpperCase()); }
+        if (type === "start") {
+          setStartTime(stringTime + " " + day.toLocaleUpperCase());
+          setValue({...value, day: day === "pm" ? true : false, start_time: stringTime})
+        }
+        else if (type === "end") {
+          setEndTime(stringTime + " " + day.toUpperCase());
+          setValue({...value, end_time: stringTime})
+        }
       },
       mode: currentMode,
       is24Hour: false
@@ -100,10 +113,16 @@ const NewTodo = ({ navigation }) => {
           <MessageInput
             multiline
             onContentSizeChange={(e) => setHeight(e.nativeEvent.contentSize.height)}
+            ref={inputRef}
+            value={text}
+            onChangeText={(text) => {
+              setText(text);
+              setValue({...value, message: text, height: height})
+            }}
           />
 
           <MessagePicker>
-            <PickerBtn>
+            <PickerBtn onPress={() => inputRef.current.focus()}>
               <Evil name={"pencil"} size={30} style={{ color: SHADOW_COLOR }} />
             </PickerBtn>
           </MessagePicker>
@@ -116,9 +135,13 @@ const NewTodo = ({ navigation }) => {
               <Evil name={"calendar"} size={30} style={{ color: CRIMSON }} />
             </CalenderBtn>
           </CalenderPicker>
-          <MessageInput value={date.length > 1 ?
-            `${stringDay(date.slice(0, 9))}, ${/\//.test(date.substring(0, 2)) ? `0${date[0]}` : date.substring(0, 2)} ${stringMonth(date.slice(0, 9))}`
-            : ""} />
+          <MessageInput
+            value={date.length > 1 ?
+              `${stringDay(date.slice(0, 9))}, ${/\//.test(date.substring(0, 2)) ? `0${date[0]}` : date.substring(0, 2)} ${stringMonth(date.slice(0, 9))}`
+              : ""}
+            editable={false}
+            style={{ color: "#000", fontSize: 17, fontWeight: "500", fontFamily: "poppins" }}
+          />
 
           <MessagePicker />
         </Message>
@@ -240,7 +263,7 @@ const NewTodo = ({ navigation }) => {
             </MessagePicker>
           )}
         />
-        
+
       </ScrollView>
 
       {/* Save button */}
