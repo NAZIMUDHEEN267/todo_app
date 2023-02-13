@@ -9,9 +9,9 @@ export const totalDays = moment().daysInMonth();
 
 export const day = Number(moment().format("DD"));
 
-export const stringDay = (date) => moment(date, "YYYY-MM-DD").format("dddd");
+export const stringDay = (date) => moment(date, "DD/MM/YYYY").format("dddd");
 
-export const stringMonth = (date) => moment(date, "YYYY-MM-DD").format("MMMM"); 
+export const stringMonth = (date) => moment(date, "DD/MM/YYYY").format("MMMM"); 
 
 // return day/day number of this month
 export const slideArray = Array(totalDays).fill(0).map((_, i) => {

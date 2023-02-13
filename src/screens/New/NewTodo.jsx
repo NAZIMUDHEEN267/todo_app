@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
-import { Calendar } from 'react-native-calendars';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import {
   CalenderBtn,
-  CalenderContainer,
   CalenderPicker,
   Divide,
   DropDownItem,
@@ -25,17 +24,8 @@ import Material from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import {
   CRIMSON,
-  DARK_BLUE,
-  DARK_CYAN,
   DARK_GREEN,
   DARK_ORANGE,
-  DARK_PINK,
-  DARK_YELLOW,
-  LIGHT_BLUE,
-  LIGHT_CYAN,
-  LIGHT_GREEN,
-  LIGHT_PINK,
-  LIGHT_YELLOW,
   SHADOW_COLOR
 } from 'constants/colors';
 import Container from '@/components/Container';
@@ -43,14 +33,15 @@ import Button from 'components/Button';
 import { ScrollView } from 'react-native-gesture-handler';
 import { stringDay, stringMonth, currentDate } from 'helper/Date';
 import { NAVIGATION } from 'constants/navigation';
+import { TODO_TYPE_DATA, TODO_REMINDER_DATA } from 'constants/data';
 
 const NewTodo = ({ navigation }) => {
-  const dispatch = useDispatch();
-
   const [height, setHeight] = useState(0);
-  const [date, setDate] = useState("");
-  const [showCalender, setShowCalender] = useState(false);
-
+  const [date, setDate] = useState(new Date());
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [styles, setStyles] = useState({ label: "Select type", icon: "question", color: "grey", bg: "rgba(0,0,0,.1)" });
+  const [bellStyle, setBellStyle] = useState({ label: "Reminder", icon: "question", color: "grey", bg: "rgba(0,0,0,.1)" });
   const [value, setValue] = useState({
     message: "",
     start_time: 0,
@@ -60,7 +51,8 @@ const NewTodo = ({ navigation }) => {
     reminder: false,
     height
   });
-
+  
+  const dispatch = useDispatch();
 
   function handleClick(e) {
     if (date.length < 1) {
@@ -75,20 +67,24 @@ const NewTodo = ({ navigation }) => {
     navigation.navigate(NAVIGATION.HOME)
   }
 
-  const [styles, setStyles] = useState({ label: "Select type", icon: "question", color: "grey", bg: "rgba(0,0,0,.1)" });
-  const [bellStyle, setBellStyle] = useState({ label: "Reminder", icon: "question", color: "grey", bg: "rgba(0,0,0,.1)" });
+  function showMode(currentMode, type) {
+    DateTimePickerAndroid.open({
+      value: new Date(),
+      onChange: function (event, selectedDate) {
+        const currentDate = selectedDate || new Date();
+        const stringDate = currentDate.toLocaleString();
+        const stringTime = stringDate.slice(11, 15);
+        const day = stringDate.slice(19, );
 
-  const todoTypeData = [
-    { label: 'Work', value: '1', bgClr: LIGHT_PINK, color: DARK_PINK, icon: "briefcase" },
-    { label: 'Habit', value: '2', bgClr: LIGHT_BLUE, color: DARK_BLUE, icon: "book" },
-    { label: 'Shopping', value: '3', bgClr: LIGHT_YELLOW, color: DARK_YELLOW, icon: "shopping-cart" },
-    { label: 'Today', value: '4', bgClr: LIGHT_GREEN, color: DARK_GREEN, icon: "sun-o" }
-  ];
+        setDate(stringDate);
 
-  const reminderData = [
-    { label: 'On', value: '1', bgClr: LIGHT_CYAN, color: DARK_CYAN, icon: "bell-o" },
-    { label: 'Off', value: '2', bgClr: LIGHT_CYAN, color: DARK_CYAN, icon: "bell-slash-o" }
-  ];
+        if(type === "start") { setStartTime(stringTime + " " + day.toLocaleUpperCase()); }
+        else { setEndTime(stringTime + " " + day.toUpperCase()); }
+      },
+      mode: currentMode,
+      is24Hour: false
+    })
+  }
 
   return (
     <Container>
@@ -116,12 +112,12 @@ const NewTodo = ({ navigation }) => {
         {/* Date picker */}
         <Message>
           <CalenderPicker>
-            <CalenderBtn onPress={() => setShowCalender(true)}>
+            <CalenderBtn onPress={() => showMode('date')}>
               <Evil name={"calendar"} size={30} style={{ color: CRIMSON }} />
             </CalenderBtn>
           </CalenderPicker>
           <MessageInput value={date.length > 1 ?
-            `${stringDay(date)}, ${date.substring(8, 10)} ${stringMonth(date)}`
+            `${stringDay(date.slice(0, 9))}, ${/\//.test(date.substring(0, 2)) ? `0${date[0]}` : date.substring(0, 2)} ${stringMonth(date.slice(0, 9))}`
             : ""} />
 
           <MessagePicker />
@@ -130,17 +126,17 @@ const NewTodo = ({ navigation }) => {
         {/* Time picker */}
         <Message style={{ borderBottomWidth: 0 }}>
           <TimePicker>
-            <TimeBtn>
+            <TimeBtn onPress={() => showMode('time', 'start')}>
               <Evil name={"clock"} size={30} color={DARK_ORANGE} />
             </TimeBtn>
-            <TimeText>00</TimeText>
+            <TimeText>{startTime}</TimeText>
           </TimePicker>
           <Divide> - </Divide>
           <TimePicker>
-            <TimeBtn>
+            <TimeBtn onPress={() => showMode('time', 'end')}>
               <Evil name={"clock"} size={30} color={DARK_ORANGE} />
             </TimeBtn>
-            <TimeText>00</TimeText>
+            <TimeText>{endTime}</TimeText>
           </TimePicker>
         </Message>
 
@@ -160,7 +156,7 @@ const NewTodo = ({ navigation }) => {
             fontWeight: 500,
             fontFamily: "poppins"
           }}
-          data={todoTypeData}
+          data={TODO_TYPE_DATA}
           labelField="label"
           valueField="value"
           onChange={(item) => {
@@ -211,7 +207,7 @@ const NewTodo = ({ navigation }) => {
             fontWeight: 500,
             fontFamily: "poppins"
           }}
-          data={reminderData}
+          data={TODO_REMINDER_DATA}
           placeholder={bellStyle.label}
           labelField="label"
           valueField="value"
@@ -244,20 +240,6 @@ const NewTodo = ({ navigation }) => {
             </MessagePicker>
           )}
         />
-
-        {/* calender */}
-        {
-          showCalender ?
-            <CalenderContainer>
-              <Calendar
-                onDayPress={(day) => {
-                  setDate(day.dateString);
-                  setShowCalender(false);
-                }}
-              />
-            </CalenderContainer>
-            : null
-        }
         
       </ScrollView>
 
