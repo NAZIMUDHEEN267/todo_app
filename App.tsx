@@ -6,6 +6,10 @@ import StackNavigator from '@/navigation/stackNavigation';
 import {light, dark} from '@/theme/theme';
 import store from '@/store';
 import { persistor } from '@/store';
+import { LogBox } from 'react-native';
+
+// ignore all warning
+// LogBox.ignoreAllLogs();
 
 function App() {
   const [theme, setTheme] = useState(false);

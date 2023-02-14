@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Dropdown } from 'react-native-element-dropdown';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
+import notification from 'helper/notification';
 import {
   CalenderBtn,
   CalenderPicker,
@@ -117,7 +118,7 @@ const NewTodo = ({ navigation }) => {
         {/* Message picker */}
         <Message style={{ height: Math.max(90, height), backgroundColor: colors.todoBox }}>
           <MessagePicker>
-            <PickerBtn activeOpacity={1}>
+            <PickerBtn activeOpacity={1} onPress={notification}>
               <Material name={"stop-circle"} size={15} style={{ color: DARK_GREEN }} />
             </PickerBtn>
           </MessagePicker>
@@ -222,7 +223,7 @@ const NewTodo = ({ navigation }) => {
           }}
           renderItem={({ label, bgClr, color, icon }) => (
             <DropDownItem style={{backgroundColor: colors.todoBox}}>
-              <MessagePicker>
+              <MessagePicker pointerEvents={"none"}>
                 <PickerBtn style={{ backgroundColor: bgClr }} activeOpacity={1}>
                   <FontAwesome name={icon} size={21} color={color} />
                 </PickerBtn>
@@ -231,7 +232,7 @@ const NewTodo = ({ navigation }) => {
             </DropDownItem>
           )}
           renderLeftIcon={() => (
-            <MessagePicker>
+            <MessagePicker pointerEvents={"none"}>
               <PickerBtn style={{ backgroundColor: styles.bg }} activeOpacity={1}>
                 <FontAwesome name={styles.icon} size={21} color={styles.color} />
               </PickerBtn>
@@ -287,7 +288,7 @@ const NewTodo = ({ navigation }) => {
             </DropDownItem>
           )}
           renderLeftIcon={() => (
-            <MessagePicker>
+            <MessagePicker pointerEvents={"none"}>
               <PickerBtn style={{ backgroundColor: bellStyle.bg }} activeOpacity={1}>
                 <FontAwesome name={bellStyle.icon} size={21} color={bellStyle.color} />
               </PickerBtn>

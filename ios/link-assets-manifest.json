@@ -72,6 +72,38 @@
     {
       "path": "src/assets/fonts/poppins.ttf",
       "sha1": "283f21b44efbdbf276ba802be2d949a36bbc4233"
+    },
+    {
+      "path": "src/assets/images/app.png",
+      "sha1": "8ca6cae577d140a761b8f259ff91feedfc83e32c"
+    },
+    {
+      "path": "src/assets/images/moon.png",
+      "sha1": "cdbc7159391b4c4b8ce28b52d4b5a4492d15f1b1"
+    },
+    {
+      "path": "src/assets/images/oops.png",
+      "sha1": "2dbd2be61540c32f26c52ea8d767509608ebc0cf"
+    },
+    {
+      "path": "src/assets/images/sun.png",
+      "sha1": "9974e8d78acd2f829d799257ed6530b5f3fcc993"
+    },
+    {
+      "path": "src/assets/raw/friend-request-14878.mp3",
+      "sha1": "fc5e9514295b0b93247a1301e6d3d770a7027f08"
+    },
+    {
+      "path": "src/assets/svg/manage.svg",
+      "sha1": "3cf29851e913b51ec57fb693f9752d87f41fb63e"
+    },
+    {
+      "path": "src/assets/svg/organize.svg",
+      "sha1": "1f4489048c7f77a417c809b1a54e9a4c023b7e98"
+    },
+    {
+      "path": "src/assets/svg/productivity.svg",
+      "sha1": "31adb6cd366439f4f246f29664f8416a6e9138ec"
     }
   ]
 }
