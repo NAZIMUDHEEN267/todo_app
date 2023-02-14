@@ -6,7 +6,8 @@ import { typography } from "theme/typography";
 export const Message = styled.View`
     width: 100%;
     height: 90px;
-    border-radius: 5px;
+    border-radius: 10px;
+    margin-vertical: 7px;
     flex-direction: row;
     align-items: center;
     border-bottom-width: 1px;
@@ -46,6 +47,7 @@ export const TimePicker = styled(MessagePicker)`
     padding: 10px;
     justify-content: center;
     border-bottom-width: 1px;
+    border-radius: 5px;
     border-color: rgba(0,0,0,.1);
 `;
 

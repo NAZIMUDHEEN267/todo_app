@@ -34,10 +34,11 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { stringDay, stringMonth, currentDate } from 'helper/Date';
 import { NAVIGATION } from 'constants/navigation';
 import { TODO_TYPE_DATA, TODO_REMINDER_DATA } from 'constants/data';
-import { typography } from 'theme/typography';
+import { useTheme } from '@react-navigation/native';
 
 const NewTodo = ({ navigation }) => {
   const [height, setHeight] = useState(0);
+  const { colors } = useTheme();
   const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -75,11 +76,10 @@ const NewTodo = ({ navigation }) => {
         date: selectedDate,
         ...value
       }
-
+      
       dispatch(SET_ITEM({ obj, selectedDate }));
       navigation.navigate(NAVIGATION.HOME)
     } catch (error) {
-      console.log(error);
       alert("please make sure that you have filled or selected the fields...")
     }
   }
@@ -115,7 +115,7 @@ const NewTodo = ({ navigation }) => {
       <ScrollView>
 
         {/* Message picker */}
-        <Message style={{ height: Math.max(90, height) }}>
+        <Message style={{ height: Math.max(90, height), backgroundColor: colors.todoBox }}>
           <MessagePicker>
             <PickerBtn activeOpacity={1}>
               <Material name={"stop-circle"} size={15} style={{ color: DARK_GREEN }} />
@@ -125,7 +125,9 @@ const NewTodo = ({ navigation }) => {
             multiline
             onContentSizeChange={(e) => setHeight(e.nativeEvent.contentSize.height)}
             ref={inputRef}
+            style={{color: colors.text}}
             placeholder={"Type your todo here"}
+            placeholderTextColor={colors.text}
             value={text}
             onChangeText={(text) => {
               setText(text);
@@ -135,7 +137,7 @@ const NewTodo = ({ navigation }) => {
 
           <MessagePicker>
             <PickerBtn onPress={() => inputRef.current.focus()}>
-              <Evil name={"pencil"} size={30} style={{ color: SHADOW_COLOR }} />
+              <Evil name={"pencil"} size={30} style={{ color: colors.sm_text }} />
             </PickerBtn>
           </MessagePicker>
         </Message>
@@ -143,23 +145,23 @@ const NewTodo = ({ navigation }) => {
 
         {/* Time picker */}
         <Message style={{ borderBottomWidth: 0 }}>
-          <TimePicker>
+          <TimePicker style={{backgroundColor: colors.todoBox}}>
             <TimeBtn onPress={() => showMode('time', 'start')}>
               <Evil name={"clock"} size={30} color={DARK_ORANGE} />
             </TimeBtn>
-            <TimeText>{startTime}</TimeText>
+            <TimeText style={{color: colors.text}}>{startTime}</TimeText>
           </TimePicker>
-          <Divide> - </Divide>
-          <TimePicker>
+          <Divide style={{color: colors.sm_text}}> - </Divide>
+          <TimePicker style={{ backgroundColor: colors.todoBox }}>
             <TimeBtn onPress={() => showMode('time', 'end')}>
               <Evil name={"clock"} size={30} color={DARK_ORANGE} />
             </TimeBtn>
-            <TimeText>{endTime}</TimeText>
+            <TimeText style={{ color: colors.text }}>{endTime}</TimeText>
           </TimePicker>
         </Message>
 
         {/* Date picker */}
-        <Message>
+        <Message style={{ backgroundColor: colors.todoBox }}>
           <CalenderPicker>
             <CalenderBtn onPress={() => showMode('date')}>
               <Evil name={"calendar"} size={30} style={{ color: CRIMSON }} />
@@ -170,7 +172,7 @@ const NewTodo = ({ navigation }) => {
               `${stringDay(date.slice(0, 9))}, ${/\//.test(date.substring(0, 2)) ? `0${date[0]}` : date.substring(0, 2)} ${stringMonth(date.slice(0, 9))}`
               : ""}
             editable={false}
-            style={{ color: "#000", fontSize: 17, fontWeight: "500", fontFamily: "poppins" }}
+            style={{ color: colors.text, fontSize: 17, fontWeight: "500", fontFamily: "poppins" }}
           />
 
           <MessagePicker />
@@ -182,17 +184,25 @@ const NewTodo = ({ navigation }) => {
           style={{
             margin: 16,
             height: 70,
-            backgroundColor: 'white',
+            backgroundColor: colors.todoBox,
             borderRadius: 12,
             padding: 12,
             ...shadow("#000")
+          }}
+          selectedTextStyle={{
+            color: colors.text,
+            fontSize: 17,
+            fontWeight: 500,
+            fontFamily: "poppins",
           }}
           placeholder={styles.label}
           placeholderStyle={{
             fontSize: 17,
             fontWeight: 500,
-            fontFamily: "poppins"
+            fontFamily: "poppins",
+            color: colors.sm_text
           }}
+          
           data={TODO_TYPE_DATA}
           labelField="label"
           valueField="value"
@@ -211,7 +221,7 @@ const NewTodo = ({ navigation }) => {
             });
           }}
           renderItem={({ label, bgClr, color, icon }) => (
-            <DropDownItem>
+            <DropDownItem style={{backgroundColor: colors.todoBox}}>
               <MessagePicker>
                 <PickerBtn style={{ backgroundColor: bgClr }} activeOpacity={1}>
                   <FontAwesome name={icon} size={21} color={color} />
@@ -234,15 +244,22 @@ const NewTodo = ({ navigation }) => {
           style={{
             margin: 16,
             height: 70,
-            backgroundColor: 'white',
+            backgroundColor: colors.todoBox,
             borderRadius: 12,
             padding: 12,
             ...shadow("#000")
           }}
+          selectedTextStyle={{ 
+            color: colors.text,
+            fontSize: 17,
+            fontWeight: 500,
+            fontFamily: "poppins",
+           }}
           placeholderStyle={{
             fontSize: 17,
             fontWeight: 500,
-            fontFamily: "poppins"
+            fontFamily: "poppins",
+            color: colors.sm_text
           }}
           data={TODO_REMINDER_DATA}
           placeholder={bellStyle.label}
@@ -260,7 +277,7 @@ const NewTodo = ({ navigation }) => {
             });
           }}
           renderItem={({ label, bgClr, color, icon }) => (
-            <DropDownItem>
+            <DropDownItem style={{ backgroundColor: colors.todoBox }}>
               <MessagePicker>
                 <PickerBtn style={{ backgroundColor: bgClr }} activeOpacity={1}>
                   <FontAwesome name={icon} size={21} color={color} />

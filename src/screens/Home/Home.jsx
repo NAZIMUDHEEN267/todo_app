@@ -92,7 +92,7 @@ const Home = ({ navigation }) => {
           Object.keys(todos).map((item) => {
             if (item === searchItem.searchItem && todos[item].length >= 1) {
               dispatch(SET_ITEM_FOUND(searchItem.searchItem));
-              return todos[item].map((item) => <Todo item={item} key={Math.random() * Date.now()} />)
+              return todos[item].map((item) => <Todo item={item} key={Math.random() * Date.now()} navigation={navigation}/>)
             }
           })
         }

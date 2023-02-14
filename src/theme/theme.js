@@ -8,7 +8,8 @@ export const dark = {
         text: "#fff",
         box: "#2a306b",
         sm_text: "#bec4bf",
-        buttonTxt: "#fff"
+        buttonTxt: "#fff",
+        todoBox: "#223767"
     }
 }
 
@@ -20,6 +21,7 @@ export const light = {
         text: "#000",
         box: "rgba(0, 0, 0, 0.1)",
         sm_text: "#455072",
-        buttonTxt: "#fff"
+        buttonTxt: "#fff",
+        todoBox: "#fff"
     }
 }

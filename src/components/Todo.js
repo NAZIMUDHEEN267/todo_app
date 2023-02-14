@@ -15,8 +15,9 @@ import shadow from '@/theme/shadow';
 import { RED } from "@/constants/colors";
 import { DELETE_ITEM } from "slices/storageSlice";
 import { useDispatch } from "react-redux";
+import { NAVIGATION } from "constants/navigation";
 
-const TodoItem = ({ item }) => {
+const TodoItem = ({ item, navigation }) => {
 
     const { colors } = useTheme();
     const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const TodoItem = ({ item }) => {
                         <AntDesign name="delete" size={20} color={RED} />
                     </TouchableOpacity>
                     {/* Todo edit button */}
-                    <TouchableOpacity activeOpacity={.5} >
+                    <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate(NAVIGATION.NewTodo, {data: item})}>
                         <FontAwesome name={"edit"} size={18} />
                     </TouchableOpacity>
                 </StatusContainer>
