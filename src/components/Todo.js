@@ -16,6 +16,7 @@ import { RED } from "@/constants/colors";
 import { DELETE_ITEM } from "slices/storageSlice";
 import { useDispatch } from "react-redux";
 import { NAVIGATION } from "constants/navigation";
+import { GREY_COLOR } from "constants/colors";
 
 const TodoItem = ({ item, navigation }) => {
 
@@ -24,13 +25,13 @@ const TodoItem = ({ item, navigation }) => {
 
     return (
         <Todo>
-            <TodoMessage style={{...shadow(item.colors.color), backgroundColor: item.colors.bg}}>
-                <TodoText>{item.message}</TodoText>
+            <TodoMessage style={{...shadow(item.colors.color), backgroundColor: item.colors.bg || colors.box}}>
+                <TodoText style={{color: item.colors.bg ? "#000" : colors.text}}>{item.message}</TodoText>
                 <BottomLine />
                 <StatusContainer>
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
-                        <FontAwesome name="clock-o" size={15} color={item.colors.color} style={{ marginRight: 8 }} />
-                        <MessageStatus>
+                        <FontAwesome name="clock-o" size={15} color={item.colors.color || colors.text} style={{ marginRight: 8 }} />
+                        <MessageStatus style={{color: item.colors.bg ? GREY_COLOR : colors.text }}>
                             {item.start_time} - {item.end_time}
                         </MessageStatus>
                     </View>
@@ -40,7 +41,7 @@ const TodoItem = ({ item, navigation }) => {
                     </TouchableOpacity>
                     {/* Todo edit button */}
                     <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate(NAVIGATION.NewTodo, {data: item})}>
-                        <FontAwesome name={"edit"} size={18} />
+                        <FontAwesome name={"edit"} size={18} style={{ color: item.colors.bg ? GREY_COLOR : colors.text }} />
                     </TouchableOpacity>
                 </StatusContainer>
             </TodoMessage>

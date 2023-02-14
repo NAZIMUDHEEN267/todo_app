@@ -7,7 +7,7 @@ export default function idCreator(date) {
     const items = store.getState().db.todos;
     
     for (const key in items) {
-        if (key === date && items[key].length > 1) {
+        if (key === date && items[key].length > 0) {
             const todoList = items[key];
             const previousTodo = todoList[todoList.length - 1];
             const previousId = previousTodo.id.split("_");

@@ -16,4 +16,5 @@ export const DARK_GREEN = "green";
 export const PRIMARY_COLOR = "orange"
 export const RED = "#db1d39";
 export const SHADOW_COLOR = "rgba(0,0,0, .4)";
+export const GREY_COLOR = "#555";
 export const CRIMSON = "crimson";
