@@ -4,7 +4,7 @@ const storageSlice = createSlice({
     name: "todo",
     initialState: {
         todos: {},
-        itemFound: false
+        itemFound: null
     },
     reducers: {
         SET_ITEM(state, action){
@@ -14,16 +14,22 @@ const storageSlice = createSlice({
             } else {
                 state.todos[selectedDate] = [obj];
             }
+            console.log(state.todos);
         },
         UPDATE_ITEM(state, action){
 
         },
         DELETE_ITEM(state, action){
-            state.todos = state.todos.map((todo) => {
-                if(todo.id !== action.payload) {
+          for (const key in state.todos) {
+            if(key === action.payload.date) {
+               state.todos[key] = state.todos[key].filter(todo => { 
+                if(todo.id !== action.payload.id) {
                     return todo;
-                }
+                } 
             })
+            }
+          }
+          console.log(state.todos);
         },
         SET_ITEM_FOUND(state, action){
             state.itemFound = action.payload;
@@ -32,4 +38,4 @@ const storageSlice = createSlice({
 });
 
 export default storageSlice.reducer;
-export const { SET_ITEM, SET_ITEM_FOUND } = storageSlice.actions;
+export const { SET_ITEM, SET_ITEM_FOUND, DELETE_ITEM } = storageSlice.actions;

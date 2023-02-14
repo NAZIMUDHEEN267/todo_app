@@ -8,6 +8,7 @@ import Todo from '@/components/Todo';
 import Container from '@/components/Container';
 import NotFound from "@/assets/images/oops.png";
 import { CHECK_USER } from '@/slices/userSlice';
+import { SET_ITEM_FOUND } from 'slices/storageSlice';
 import { PRIMARY_COLOR } from '@/constants/colors';
 import { NAVIGATION } from '@/constants/navigation';
 import {
@@ -18,20 +19,18 @@ import {
   TodoContainer,
 } from './style';
 import { day } from '@/helper/Date';
-import { SET_ITEM_FOUND } from 'slices/storageSlice';
 
 
-const Home = ({navigation}) => {
-  const [searchItem, setSearchItem] = useState(currentDate);
-  const [itemFound, setItemFound] = useState(false);
+const Home = ({ navigation }) => {
+  const [searchItem, setSearchItem] = useState({searchItem: currentDate, pressItem: -1});
   const { colors } = useTheme();
-  const { todos } = useSelector(state => state.db);
+  const { todos, itemFound } = useSelector(state => state.db);
   const dispatch = useDispatch();
   const navScrollRef = useRef();
 
   useEffect(() => {
     dispatch(CHECK_USER(false));
-    navScrollRef.current.scrollToIndex({ index: day, viewOffset: day * 53})
+    navScrollRef.current.scrollToIndex({ index: day, viewOffset: day * 53 })
   }, []);
 
   // Event handler for button 
@@ -60,10 +59,24 @@ const Home = ({navigation}) => {
 
             return (
               <CarouselItem
-                style={currentDate ? { backgroundColor: PRIMARY_COLOR } : { backgroundColor: colors.box, transform: [{ scale: .9 }] }}
+                style={
+                  currentDate ? 
+                  {
+                    backgroundColor: PRIMARY_COLOR
+                  } : 
+                  (searchItem.pressItem === index) ? 
+                  { 
+                    borderWidth: 2,
+                    borderColor: PRIMARY_COLOR,
+                    backgroundColor: colors.box
+                  } : 
+                  {
+                    backgroundColor: colors.box
+                  }
+                  }
                 mrglft={index === 0 ? true : false}
                 mrgrght={index === slideArray.length - 1 ? true : false}
-                onPress={() => setSearchItem(`${index}/02/2023`)}
+                onPress={() => setSearchItem({searchItem: `${index + 1}/02/2023`, pressItem: index})}
               >
                 <SliderMedText style={currentDate ? { color: colors.buttonTxt } : { color: colors.text }}>{item.dayNUm}</SliderMedText>
                 <SliderSmText style={currentDate ? { color: colors.buttonTxt } : { color: colors.sm_text }}>{item.day}</SliderSmText>
@@ -77,28 +90,24 @@ const Home = ({navigation}) => {
         showsVerticalScrollIndicator={false}>
         {
           Object.keys(todos).map((item) => {
-            if(item === "13/02/2023") {
-              setItemFound(false);
-              return todos[item].map((item) => <Todo item={item} key={Math.random() * Date.now()}/>)
-            } else {
-              setItemFound(false);
-              return []
+            if (item === searchItem.searchItem && todos[item].length >= 1) {
+              dispatch(SET_ITEM_FOUND(searchItem.searchItem));
+              return todos[item].map((item) => <Todo item={item} key={Math.random() * Date.now()} />)
             }
           })
         }
-
-        {   
-            !itemFound ?  
-            <Image
+        {
+          itemFound !== searchItem.searchItem ?
+            (<Image
               source={NotFound}
               style={{ width: 200, height: 200, margin: "25%" }}
               resizeMode={"contain"}
-            />
-            : null
+            />) :
+            null
         }
       </TodoContainer>
       {/* add button */}
-      <Button eventHandler={eventHandler} btnText={"+ Add a New Todo"}/>
+      <Button eventHandler={eventHandler} btnText={"+ Add a New Todo"} />
     </Container>
   )
 }

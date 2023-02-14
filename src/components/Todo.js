@@ -13,10 +13,13 @@ import {
 } from "@/screens/Home/style";
 import shadow from '@/theme/shadow';
 import { RED } from "@/constants/colors";
+import { DELETE_ITEM } from "slices/storageSlice";
+import { useDispatch } from "react-redux";
 
 const TodoItem = ({ item }) => {
 
     const { colors } = useTheme();
+    const dispatch = useDispatch();
 
     return (
         <Todo>
@@ -31,7 +34,7 @@ const TodoItem = ({ item }) => {
                         </MessageStatus>
                     </View>
                     {/* Todo delete button */}
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => dispatch(DELETE_ITEM({id: item.id, date: item.date}))}>
                         <AntDesign name="delete" size={20} color={RED} />
                     </TouchableOpacity>
                     {/* Todo edit button */}

@@ -61,7 +61,7 @@ const NewTodo = ({ navigation }) => {
   function handleClick() {
     try {
       const checkDate = date.split("/");
-      
+
       if (checkDate[0].length === 1) {
         checkDate[0] = "0" + checkDate[0];
       } if (checkDate[1].length === 1) {
@@ -72,12 +72,14 @@ const NewTodo = ({ navigation }) => {
 
       const obj = {
         id: idCreator(selectedDate),
+        date: selectedDate,
         ...value
       }
-      
+
       dispatch(SET_ITEM({ obj, selectedDate }));
       navigation.navigate(NAVIGATION.HOME)
     } catch (error) {
+      console.log(error);
       alert("please make sure that you have filled or selected the fields...")
     }
   }
@@ -123,6 +125,7 @@ const NewTodo = ({ navigation }) => {
             multiline
             onContentSizeChange={(e) => setHeight(e.nativeEvent.contentSize.height)}
             ref={inputRef}
+            placeholder={"Type your todo here"}
             value={text}
             onChangeText={(text) => {
               setText(text);
@@ -135,6 +138,24 @@ const NewTodo = ({ navigation }) => {
               <Evil name={"pencil"} size={30} style={{ color: SHADOW_COLOR }} />
             </PickerBtn>
           </MessagePicker>
+        </Message>
+
+
+        {/* Time picker */}
+        <Message style={{ borderBottomWidth: 0 }}>
+          <TimePicker>
+            <TimeBtn onPress={() => showMode('time', 'start')}>
+              <Evil name={"clock"} size={30} color={DARK_ORANGE} />
+            </TimeBtn>
+            <TimeText>{startTime}</TimeText>
+          </TimePicker>
+          <Divide> - </Divide>
+          <TimePicker>
+            <TimeBtn onPress={() => showMode('time', 'end')}>
+              <Evil name={"clock"} size={30} color={DARK_ORANGE} />
+            </TimeBtn>
+            <TimeText>{endTime}</TimeText>
+          </TimePicker>
         </Message>
 
         {/* Date picker */}
@@ -155,22 +176,6 @@ const NewTodo = ({ navigation }) => {
           <MessagePicker />
         </Message>
 
-        {/* Time picker */}
-        <Message style={{ borderBottomWidth: 0 }}>
-          <TimePicker>
-            <TimeBtn onPress={() => showMode('time', 'start')}>
-              <Evil name={"clock"} size={30} color={DARK_ORANGE} />
-            </TimeBtn>
-            <TimeText>{startTime}</TimeText>
-          </TimePicker>
-          <Divide> - </Divide>
-          <TimePicker>
-            <TimeBtn onPress={() => showMode('time', 'end')}>
-              <Evil name={"clock"} size={30} color={DARK_ORANGE} />
-            </TimeBtn>
-            <TimeText>{endTime}</TimeText>
-          </TimePicker>
-        </Message>
 
         {/* Types of Todo */}
         <Dropdown
