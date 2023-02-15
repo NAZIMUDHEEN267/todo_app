@@ -14,7 +14,6 @@ const storageSlice = createSlice({
             } else {
                 state.todos[selectedDate] = [obj];
             }
-            console.log(state.todos);
         },
         UPDATE_ITEM(state, action){
 

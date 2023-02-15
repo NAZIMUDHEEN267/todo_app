@@ -7,7 +7,7 @@ import { fullDate } from "@/helper/Date";
 
 const Stack = createStackNavigator();
 
-export default function StackNavigator(props) {
+export default function AppNavigator(props) {
     return (
         <Stack.Navigator screenOptions={() => ({
             headerRight: () => <LightButton {...props}/>

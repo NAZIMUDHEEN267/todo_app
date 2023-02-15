@@ -1,27 +1,7 @@
-import notifee, { AndroidColor, TimestampTrigger, TriggerType } from '@notifee/react-native';
+import notifee, { AndroidColor, RepeatFrequency, TimestampTrigger, TriggerType } from '@notifee/react-native';
 
 export default async function notification () {
 
-    const date = new Date(Date.now());
-    console.log(date);
-    date.setHours(2);
-    date.setMinutes(45);
-
-    const trigger: TimestampTrigger = {
-        type: TriggerType.TIMESTAMP,
-        timestamp: date.getTime()
-    };
-
-    await notifee.createTriggerNotification(
-        {
-            title: 'Meeting with Jane',
-            body: 'Today at 11:20am',
-            android: {
-                channelId: 'your-channel-id',
-            },
-        },
-        trigger,
-    );
     // Create a channel (required for Android)
     const channelId = await notifee.createChannel({
         id: 'friend',

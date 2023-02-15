@@ -1,3 +1,7 @@
+import MANAGE from "../assets/svg/manage.svg";
+import ORGANIZE from "../assets/svg/organize.svg";
+import PRODUCTIVITY from "../assets/svg/productivity.svg";
+
 import {
     DARK_BLUE,
     DARK_CYAN,
@@ -22,3 +26,9 @@ export const TODO_REMINDER_DATA = [
     { label: 'On', value: '1', bgClr: LIGHT_CYAN, color: DARK_CYAN, icon: "bell-o" },
     { label: 'Off', value: '2', bgClr: LIGHT_CYAN, color: DARK_CYAN, icon: "bell-slash-o" }
 ];
+
+export const CAROUSEL_DATA = [
+    { svg: MANAGE, title: "Manage your tasks", subtitle: "repudiandae vitae voluptatibus quibusdam voluptate sint id praesentium eius illum corrupti vero, doloremque odio ex."},
+    { svg: ORGANIZE, title: "Organize your tasks", subtitle: "repudiandae vitae voluptatibus quibusdam voluptate sint id praesentium eius illum corrupti vero, doloremque odio ex." },
+    { svg: PRODUCTIVITY, title: "Increase your productivity", subtitle: "repudiandae vitae voluptatibus quibusdam voluptate sint id praesentium eius illum corrupti vero, doloremque odio ex." },
+]

@@ -1,7 +1,5 @@
 export const NAVIGATION = {
-    MANAGE: "Manage Screen",
-    PRODUCTIVITY: "Productivity Screen",
-    ORGANIZE: "Organize Screen",
+    FRESH: "Fresh Screen",
     HOME: "Home Screen",
     Edit: "Edit Screen",
     NewTodo: "New Screen"

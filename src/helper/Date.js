@@ -4,7 +4,7 @@ const moment = require('moment');
 export const fullDate = moment().format("MMMM DD");
 
 export const currentDate = moment().format("DD/MM/YYYY");
-
+console.log(moment("15/02/2023 15:22", "DD/MM/YYYY HH:mm").valueOf());
 export const totalDays = moment().daysInMonth();
 
 export const day = Number(moment().format("DD"));

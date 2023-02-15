@@ -7,7 +7,6 @@ import Button from '@/components/Button';
 import Todo from '@/components/Todo';
 import Container from '@/components/Container';
 import NotFound from "@/assets/images/oops.png";
-import { CHECK_USER } from '@/slices/userSlice';
 import { SET_ITEM_FOUND } from 'slices/storageSlice';
 import { PRIMARY_COLOR } from '@/constants/colors';
 import { NAVIGATION } from '@/constants/navigation';
@@ -29,7 +28,6 @@ const Home = ({ navigation }) => {
   const navScrollRef = useRef();
 
   useEffect(() => {
-    dispatch(CHECK_USER(false));
     navScrollRef.current.scrollToIndex({ index: day, viewOffset: day * 53 })
   }, []);
 

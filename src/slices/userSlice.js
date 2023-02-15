@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const storageSlice = createSlice({
     name: "checkUser",
     initialState: {
-        isUserFirst: true
+        isUserFirst: false
     },
     reducers: {
         CHECK_USER(state, action) {
